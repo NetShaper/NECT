@@ -29,10 +29,11 @@ while(run):
         read.remove('')
     #these four lines do 25+ lines of C work and then some
     if read[comm] == "exit":
+        skip = 0
         print("Exiting terminal.\n"+line)
         run = 0
     if read[comm] == "help":
-        skip = 0;
+        skip = 0
         print(Fore.GREEN+Style.BRIGHT+"Need some help?\n\nBasic command format:"+Style.NORMAL+"\n  Command::Argument1:Argument2::END")
         print("  Command::Argument1:Argument2:Option::END")
         print(Style.BRIGHT+"Standalone commands:"+Style.NORMAL+"\n  help - displays this!")
@@ -41,6 +42,7 @@ while(run):
         print("  SET - target:source\n  FIRE - weapon:target\n"+Style.BRIGHT+"Option Arguments:"+Style.NORMAL+"\n  END - Do nothing")
         print("  RELOAD - Reloads last fired weapon"+Fore.RESET)
     if read[comm] == "LOAD":
+        skip = 0
         if read[arg0] == user[item]:
             print(Fore.GREEN+"> "+read[arg0]+" already loaded!")
         elif read[arg0] != user[item]:
@@ -59,6 +61,7 @@ while(run):
                 print("> "+read[arg0]+"."+read[arg1]+".initialize successful!"+Fore.RESET)
                 user[arg1] = read[arg1]
     if read[comm] == "SET":
+        skip = 0
         if read[arg0] == user[arg0]:
             print(Fore.GREEN+"> "+read[arg0]+" already selected!")
         elif read[arg0] != user[arg0]:
@@ -76,6 +79,7 @@ while(run):
             else:
                 print("> Input from "+read[arg0]+"."+read[arg1]+".initialize successfully retrieved!"+Fore.RESET)
     if read[comm] == "FIRE":
+        skip = 0
         fired = 0;
         if read[arg0].lower() != "target":
             print(Fore.GREEN+"> Error! arg0 must be \"target\"!")
@@ -91,6 +95,10 @@ while(run):
                 print(Fore.RED+Style.BRIGHT+"> Error! "+read[arg1]+".fire failed to execute!"+Fore.RESET+Style.NORMAL)
             else:
                 print("> "+user[item]+".state: Fired successfully!"+Fore.RESET)
+                if read[optn].lower() == "reload":
+                    print(Fore.GREEN+"> "+user[item]+".reload.LastUsed: successful!"+Fore.RESET)
         elif read[arg1] != user[item]:
             print(Fore.RED+Style.BRIGHT+"> Error! "+read[arg1]+".fire failed to execute: "+user[item]+" currently loaded!"+Fore.RESET+Style.NORMAL)
+    if skip == 1:
+        print(Fore.RED+Style.BRIGHT+"> '"+read[comm]+"' is not recognized as an internal or external command,\noperable program or batch file."+Style.NORMAL+Fore.RESET)
                 
