@@ -7,7 +7,7 @@ Goal of this project:
 To create a series of common classes, objects, functions to allow the creation of a NECT Terminal Emulator.
 
 My idea is to create common libraries for things such as:
-IRC client for the Epoch chat room 
+IRC client for the Epoch chat room,
 RSS Parsing dedicated to the sub's posts, etc.
 Emulate the actions (like firing weapons) that a user in the world would use. 
 More as time goes on and the world expands. 
